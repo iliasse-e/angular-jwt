@@ -34,10 +34,8 @@ export class LoginComponent {
   }
 
   login() {
-    console.log("login", this.user);
     this.#loginService.login(this.user.username!, this.user.password!)
     .subscribe(() => this.#router.navigateByUrl("home"));
   }
-
 
 }

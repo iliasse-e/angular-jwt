@@ -1,23 +1,25 @@
-import { inject } from "@angular/core";
-import { AuthenticationService } from "../service/auth.service";
-import { HttpEvent, HttpHandlerFn, HttpHeaders, HttpRequest } from "@angular/common/http";
+import { HttpEvent, HttpHandlerFn, HttpRequest } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { ACCESS_TOKEN, LOGIN_URL, REFRESH_TOKEN_URL } from "../../utils";
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  const auth = inject(AuthenticationService);
-  const token = auth.token();
+  const token = localStorage.getItem(ACCESS_TOKEN);
+
+  // Si on tente de login ou rafraichir le token, on n'envoie pas de Bearer token (sinon le serveur génère une 401)
+  if (req.url.includes(LOGIN_URL) || req.url.includes(REFRESH_TOKEN_URL)) {
+    return next(req)
+  }
 
   if (!token) {
     return next(req)
   }
 
-  const headers = new HttpHeaders({
-    Authorization: "Bearer " + token
-  })
-
   const newReq = req.clone({
-    headers
+    setHeaders: {
+      Authorization: `Bearer ${token}`,
+    },
+    withCredentials: true
   })
 
-  return next(newReq)
+  return next(newReq);
 }

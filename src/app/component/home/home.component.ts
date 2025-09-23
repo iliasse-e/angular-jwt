@@ -1,7 +1,7 @@
 import { Component, effect, inject, Signal, signal } from '@angular/core';
 import { User } from '../../user.type';
 import { HttpClient } from '@angular/common/http';
-import { USERS_URL } from '../../../url';
+import { USERS_URL } from '../../../utils';
 
 @Component({
   selector: 'home',

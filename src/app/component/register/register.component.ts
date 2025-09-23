@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { USERS_URL } from '../../../url';
+import { USERS_URL } from '../../../utils';
 import { Router } from '@angular/router';
 
 @Component({
