@@ -100,3 +100,10 @@ Cette méthode permet de rafraichir le `access-token` via l'envoie du `refresh-t
 Le jeton d'accès se met à jour, et l'on peut de nouveau effectuer des nouvelles requêtes au serveur sans recevoir d'erreur `401`.
 
 Si le `refresh-token` est invalide (car dépassé), alors on `.logout()`, et redirige vers le formulaire de login.
+
+
+## Utilisation de la bibliothèque @auth0/angular-jwt
+
+```
+git clone https://github.com/auth0/angular2-jwt.git
+```
